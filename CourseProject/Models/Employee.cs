@@ -20,6 +20,9 @@ namespace CourseProject.Models
         [Display(Name = "Отчество")]
         [StringLength(50)]
         public string MiddleName { get; set; }
+
+        [Display(Name = "ФИО сотрудника")]
+        public string FullName { get { return LastName + " " + FirstName + " " + MiddleName; } }
         public int DepartmentID { get; set; }
 
         public virtual Department Department { get; set; }

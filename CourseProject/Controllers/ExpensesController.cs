@@ -21,6 +21,7 @@ namespace CourseProject.Controllers
         {
             ViewBag.IDSortParam = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewBag.EmployeeSortParam = sortOrder == "employee" ? "employee_desc" : "employee";
+            ViewBag.DepartmentSortParam = sortOrder == "department" ? "department_desc" : "department";
             ViewBag.KindOfExpenseSortParam = sortOrder == "kind_of_exp" ? "kind_of_exp_desc" : "kind_of_exp";
             ViewBag.DateSortParam = sortOrder == "date" ? "date_desc" : "date";
             ViewBag.SummSortParam = sortOrder == "summ" ? "summ_desc" : "summ";
@@ -39,6 +40,14 @@ namespace CourseProject.Controllers
 
                 case "employee_desc":
                     expenses = expenses.OrderByDescending(e => e.Employee.LastName);
+                    break;
+
+                case "department":
+                    expenses = expenses.OrderBy(e => e.Employee.Department.Name);
+                    break;
+
+                case "department_desc":
+                    expenses = expenses.OrderByDescending(e => e.Employee.Department.Name);
                     break;
 
                 case "kind_of_exp":
@@ -94,7 +103,7 @@ namespace CourseProject.Controllers
         // GET: Expenses/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName");
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "FullName");
             ViewBag.KindOfExpensesID = new SelectList(db.KindsOfExpenses, "ID", "Name");
             return View();
         }
@@ -141,7 +150,7 @@ namespace CourseProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "FirstName", expense.EmployeeID);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "FullName", expense.EmployeeID);
             ViewBag.KindOfExpensesID = new SelectList(db.KindsOfExpenses, "ID", "Name", expense.KindOfExpensesID);
             return View(expense);
         }
@@ -171,7 +180,7 @@ namespace CourseProject.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "FirstName", expense.EmployeeID);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "FullName", expense.EmployeeID);
             ViewBag.KindOfExpensesID = new SelectList(db.KindsOfExpenses, "ID", "Name", expense.KindOfExpensesID);
             return View(expense);
         }

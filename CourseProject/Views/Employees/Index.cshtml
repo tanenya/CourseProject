@@ -17,10 +17,10 @@
             @Html.ActionLink("Название отдела", "Index", new { sortOrder = ViewBag.DepartmentSortParam })
         </th>
         <th>
-            @Html.ActionLink("Имя", "Index", new { sortOrder = ViewBag.NameSortParam })
+            @Html.ActionLink("Фамилия", "Index", new { sortOrder = ViewBag.LastNameSortParam })
         </th>
         <th>
-            @Html.ActionLink("Фамилия", "Index", new { sortOrder = ViewBag.LastNameSortParam })
+            @Html.ActionLink("Имя", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         <th>
             @Html.ActionLink("Отчество", "Index", new { sortOrder = ViewBag.MiddleNameSortParam })
@@ -34,10 +34,10 @@
             @Html.DisplayFor(modelItem => item.Department.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
+            @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LastName)
+            @Html.DisplayFor(modelItem => item.FirstName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MiddleName)
