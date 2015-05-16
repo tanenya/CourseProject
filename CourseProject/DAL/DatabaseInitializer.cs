@@ -40,7 +40,6 @@ namespace CourseProject.DAL
                 new KindOfExpensesDepartmentRelation{KindOfExpensesID=1, DepartmentID=2, Limit=150000},
                 new KindOfExpensesDepartmentRelation{KindOfExpensesID=1, DepartmentID=3, Limit=150000},
                 new KindOfExpensesDepartmentRelation{KindOfExpensesID=2, DepartmentID=1, Limit=100000},
-                new KindOfExpensesDepartmentRelation{KindOfExpensesID=1, DepartmentID=3, Limit=100000},
                 new KindOfExpensesDepartmentRelation{KindOfExpensesID=4, DepartmentID=4, Limit=500000},
                 new KindOfExpensesDepartmentRelation{KindOfExpensesID=5, DepartmentID=2, Limit=100000},
                 new KindOfExpensesDepartmentRelation{KindOfExpensesID=3, DepartmentID=3, Limit=50000},
