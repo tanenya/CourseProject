@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<CourseProject.Models.KindOfExpensesDepartmentRelation>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Список лимитов расходов";
+}
+
+<h2>Список лимитов расходов</h2>
+
+<p>
+    @Html.ActionLink("Добавить лимит расходов", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Название отдела", "Index", new { sortOrder = ViewBag.DepartmentSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Вид расходов", "Index", new { sortOrder = ViewBag.KindOfExpenseSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Лимит", "Index", new { sortOrder = ViewBag.LimitSortParam })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KindOfExpenses.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Limit)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Подробно", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))

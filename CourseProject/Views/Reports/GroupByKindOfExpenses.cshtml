@@ -1,0 +1,100 @@
+﻿@model CourseProject.Models.Reports
+
+@{
+    ViewBag.Title = "Отчет о внутренних расходах с группировкой по видам расходов";
+}
+<br>
+<br>
+<br>
+<h5>Отчет о внутренних расходах с группировкой по видам расходов</h5>
+
+@using (Html.BeginForm("GroupByKindOfExpenses", "Reports", FormMethod.Get))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.EditorFor(model => model.StartDate)
+    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+
+    @Html.EditorFor(model => model.EndDate)
+    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+
+    <input type="submit" value="Поиск" />
+}
+
+<table class="table">
+    @{var summ = 0m;}
+   
+     @foreach (var expByKind in Model.ExpensesByKindOfExpenses)
+    {
+        summ += expByKind.Sum(i => i.Summ);
+        <tr>
+            <th>
+                Вид расходов : @Html.DisplayFor(item => expByKind.Key.Name)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <b>Фамилия</b>
+            </th>
+            <th>
+                <b>Имя</b>
+            </th>
+            <th>
+                <b>Отчество</b>
+            </th>
+            <th>
+                <b>Отдел</b>
+            </th>
+            <th>
+                <b>Дата</b>
+            </th>
+            <th>
+                <b>Сумма</b>
+            </th>
+        </tr>
+
+        foreach (var item in expByKind)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.LastName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.MiddleName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Department.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Summ)
+                </td>
+            </tr>
+        }
+    }
+
+    <tr>
+        <th>
+            Итого: @Html.DisplayFor(modelItem => summ);
+        </th>
+    </tr>
+
+</table>
+
+<div>
+    @Html.ActionLink("Назад к списку отчетов", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

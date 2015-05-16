@@ -1,0 +1,63 @@
+﻿@model PagedList.IPagedList<CourseProject.Models.Expense>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Список расходов";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Добавить расход", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Идентификатор", "Index", new { sortOrder = ViewBag.IDSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Сотрудник", "Index", new { sortOrder = ViewBag.EmployeeSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Вид расхода", "Index", new { sortOrder = ViewBag.KindOfExpenseSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Дата", "Index", new { sortOrder = ViewBag.DateSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Сумма", "Index", new { sortOrder = ViewBag.SummSortParam })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KindOfExpenses.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Summ)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Подробно", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))

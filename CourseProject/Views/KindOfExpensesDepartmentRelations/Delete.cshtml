@@ -1,0 +1,48 @@
+﻿@model CourseProject.Models.KindOfExpensesDepartmentRelation
+
+@{
+    ViewBag.Title = "Удаление лимита расходов";
+}
+
+<h2>Удаление лимита расходов</h2>
+
+<h3>Вы уверены, что хотите удалить?</h3>
+<div>
+    <h4>Лимит расходов</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KindOfExpenses.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KindOfExpenses.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Limit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Limit)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад к списку лимитов расходов", "Index")
+        </div>
+    }
+</div>

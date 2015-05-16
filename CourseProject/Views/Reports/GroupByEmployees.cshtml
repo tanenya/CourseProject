@@ -1,0 +1,80 @@
+﻿@using CourseProject.Models;
+@model CourseProject.Models.Reports
+
+@{
+    ViewBag.Title = "Отчет о внутренних расходах с группировкой по сотрудникам";
+}
+
+<br>
+<br>
+<br>
+<h5>Отчет о внутренних расходах с группировкой по сотрудникам</h5>
+
+@using (Html.BeginForm("GroupByEmployees", "Reports", FormMethod.Get))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.EditorFor(model => model.StartDate)
+    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+        
+    @Html.EditorFor(model => model.EndDate)
+    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+
+    <input type="submit" value="Поиск" />
+}
+
+<table class="table">
+    @{var summ = 0m;}
+    
+    @foreach (var expByEmp in Model.ExpensesByEmployee)
+    {
+        summ += expByEmp.Sum(i => i.Summ);
+        <tr>
+            <th>
+                Сотрудник : @Html.DisplayFor(item => expByEmp.Key.LastName) @Html.DisplayFor(item => expByEmp.Key.FirstName) @Html.DisplayFor(item => expByEmp.Key.MiddleName)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <b>Вид расходов</b>
+            </th>
+            <th>
+                <b>Дата</b>
+            </th>
+            <th>
+                <b>Сумма</b>
+            </th>
+        </tr>
+        
+        foreach (var item in expByEmp)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KindOfExpenses.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Summ)
+                </td>
+            </tr>
+        }
+    }
+
+    <tr>
+        <th>
+            Итого: @Html.DisplayFor(modelItem => summ);
+        </th>
+    </tr>
+   
+</table>
+
+<div>
+    @Html.ActionLink("Назад к списку отчетов", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,42 @@
+﻿@model CourseProject.Models.KindOfExpensesDepartmentRelation
+
+@{
+    ViewBag.Title = "Сведения о лимите раходов";
+}
+
+<h2>Сведения о лимите расходов</h2>
+
+<div>
+    <h4>Лимит расходов</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KindOfExpenses.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KindOfExpenses.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Limit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Limit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Назад к списку лимитов расходов", "Index")
+</p>

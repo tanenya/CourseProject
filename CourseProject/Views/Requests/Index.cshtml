@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Запросы";
+}
+
+<h2>Запросы</h2>
+
+<h6>
+    Поисковые запросы
+</h6>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Поиск всех внутренних расходов по отделу", "ExpensesByDepartment", "Requests")
+        </th>
+        <th>
+            @Html.ActionLink("Поиск сотрудников по расходному документу", "EmployeeByExpense", "Requests")
+        </th>
+        <th>
+            @Html.ActionLink("Поиск всех расходов за текущий месяц", "ExpensesInThisMonth", "Requests")
+        </th>
+    </tr>
+
+</table>
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CourseProject.Models.Expense>
+@{
+    ViewBag.Title = "Поиск всех внутренних расходов по отделу";
+}
+
+<h2>Поиск всех внутренних расходов по отделу</h2>
+
+@using (Html.BeginForm("ExpensesByDepartment", "Requests", FormMethod.Get))
+{
+    <p>
+        Поиск по отделу: @Html.DropDownList("id", (SelectList)ViewBag.Departments)
+        <input type="submit" value="Поиск" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KindOfExpenses.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Summ)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KindOfExpenses.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Summ)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+@Html.ActionLink("Назад к списку запросов", "Index")

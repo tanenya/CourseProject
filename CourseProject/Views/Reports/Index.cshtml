@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Отчеты о внутренних расходах за период";
+}
+
+<h2>Отчеты о внутренних расходах за период</h2>
+
+<h6>
+    Отчет о внутренних расходах за указанный период
+</h6>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Группировка по сотрудникам", "GroupByEmployees", "Reports")
+        </th>
+        <th>
+            @Html.ActionLink("Группировка по видам расходов", "GroupByKindOfExpenses", "Reports")
+        </th>
+    </tr>
+
+</table>
+

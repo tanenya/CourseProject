@@ -1,0 +1,38 @@
+﻿@model PagedList.IPagedList<CourseProject.Models.Department>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Список отделов";
+}
+
+<h2>Список отделов</h2>
+
+<p>
+    @Html.ActionLink("Добавить отдел", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th> 
+            @Html.ActionLink("Название отдела", "Index", new { sortOrder = ViewBag.NameSortParam }) 
+        </th>
+</tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Подробно", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br /> 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
